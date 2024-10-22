@@ -17,18 +17,11 @@
 <div class="station">
 
   <div class="nav-bar">
-    <button
-      *ngIf="dashboardEnabled"
-      (click)="goBack()"
-      type="button"
-      class="htf-link-button">
+    <button *ngIf="dashboardEnabled" (click)="goBack()" type="button" class="htf-link-button">
       ‹ Return to station selection
     </button>
     <div class="u-flex-grow"></div>
-    <button
-      (click)="manualReload()"
-      type="button"
-      class="htf-link-button">
+    <button (click)="manualReload()" type="button" class="htf-link-button">
       Refresh station
     </button>
   </div>
@@ -52,19 +45,18 @@
       <htf-user-input-plug [test]="activeTest"></htf-user-input-plug>
     </div>
 
+
+
     <div class="htf-layout-widgets-container">
       <div class="htf-layout-widgets-left">
-        <div
-          *ngIf="selectedTest !== null"
-          class="past-test-warning htf-layout-widget">
+        <htf-test-control [test]="activeTest" [station]="selectedStation"
+          (onSelectTest)="onSelectTest($event.test)"></htf-test-control>
+        <div *ngIf="selectedTest !== null" class="past-test-warning htf-layout-widget">
           <div class="htf-layout-widget-header">
             <div>Displaying test record for a previous test run</div>
             <span>&nbsp;({{ selectedTest.startTimeMillis | timeAgo }})</span>
             <div class="u-flex-grow"></div>
-            <button
-              type="button"
-              class="htf-rounded-button-grey"
-              (click)="onSelectTest(null)">
+            <button type="button" class="htf-rounded-button-grey" (click)="onSelectTest(null)">
               Return to current test
             </button>
           </div>
@@ -77,9 +69,7 @@
       </div>
 
       <div class="htf-layout-widgets-right">
-        <htf-history
-          [selectedTest]="selectedTest"
-          [station]="selectedStation"
+        <htf-history [selectedTest]="selectedTest" [station]="selectedStation"
           (onSelectTest)="onSelectTest($event.test)">
         </htf-history>
       </div>
