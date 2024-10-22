@@ -27,6 +27,7 @@ import os
 import re
 import socket
 import threading
+import traceback
 import time
 import types
 from typing import Optional, Union
@@ -181,10 +182,16 @@ class StationWatcher(threading.Thread):
                      '`dictionary changed size during iteration`.')
           time.sleep(0.1)
         else:
-          _LOG.exception('Error in station watcher: %s', error)
+          formatted_exception = traceback.format_exception(
+              type(error), error, error.__traceback__)
+          _LOG.error('Error in station watcher: \n',
+                      "".join(formatted_exception))
           time.sleep(1)
       except Exception as error:  # pylint: disable=broad-except
-        _LOG.exception('Error in station watcher: %s', error)
+          formatted_exception = traceback.format_exception(
+              type(error), error, error.__traceback__)
+          _LOG.error('Error in station watcher: \n',
+                      "".join(formatted_exception))
         time.sleep(1)
 
   @functions.call_at_most_every(float(CONF.frontend_throttle_s))
