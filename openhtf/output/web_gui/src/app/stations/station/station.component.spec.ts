@@ -28,6 +28,7 @@ import {TimeAgoPipe} from '../../shared/time-ago.pipe';
 
 import {StationComponent} from './station.component';
 import {StationService} from './station.service';
+import {TestControlComponent} from './test-control.component';
 
 // Selectors for components used in the station component template which take
 // a single test state as input.
@@ -123,6 +124,7 @@ describe('station component', () => {
     TestBed.configureTestingModule({
       declarations: (testWidgetStubs as Array<{}>).concat([
         HistoryComponentStub,
+        TestControlComponent,
         StationComponent,
         HostComponent,
         TimeAgoPipe,

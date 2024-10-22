@@ -23,6 +23,7 @@
 
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { PlugsModule } from '../plugs/plugs.module';
 import { SharedModule } from '../shared/shared.module';
@@ -38,12 +39,14 @@ import { PhaseComponent } from './station/phase.component';
 import { StationComponent } from './station/station.component';
 import { StationService } from './station/station.service';
 import { TestSummaryComponent } from './station/test-summary.component';
+import { TestControlComponent } from './station/test-control.component';
 
 @NgModule({
   imports: [
     CommonModule,
     PlugsModule,
     SharedModule,
+    FormsModule,
   ],
   declarations: [
     StationListComponent,
@@ -54,6 +57,7 @@ import { TestSummaryComponent } from './station/test-summary.component';
     PhaseListComponent,
     StationComponent,
     TestSummaryComponent,
+    TestControlComponent,
   ],
   providers: [
     DashboardService,

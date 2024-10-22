@@ -1,0 +1,45 @@
+<div class="htf-layout-widget">
+  <div [@animateIn]="'in'" *ngIf="!testRunning() && hasTests()">
+
+    <div class="htf-layout-widget-header">
+      <div>Start new test</div>
+    </div>
+
+    <div class="htf-layout-widget-body">
+      <div class="dropdown" (mouseleave)="isDropdownOpen = false">
+        <input #response_field type="text" [style.display]="inline" class="u-push-top" [(ngModel)]="searchText"
+          (input)="filterItems()" placeholder="Select test..." (click)="isDropdownOpen = true">
+        <ul *ngIf="isDropdownOpen" class="" dropdown-list>
+          <li *ngFor="let item of filteredTests" (click)="selectItem(item)" [class.selected]="item === selectedValue"
+            (mouseenter)="onMouseEnter(item)" (mouseleave)="onMouseLeave()">
+            {{item}}
+          </li>
+        </ul>
+      </div>
+
+      <div class="test-control-error-text u-push-top-third" *ngIf="error">
+        {{ error }}
+      </div>
+
+      <div class="u-text-align-right">
+        <button type="button" class="htf-rounded-button-grey u-push-top" (click)="sendTestStart(response_field)">
+          START
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div [@animateIn]="'in'" *ngIf="testRunning()">
+
+    <div class="htf-layout-widget-body">
+      <div [innerHTML]="control"></div>
+
+      <div class="u-font-size-large">
+        <button type="button" class="htf-rounded-button-red  u-font-size-large" (click)="abort()">
+          ABORT TEST
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
